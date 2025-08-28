@@ -31,7 +31,7 @@ export default function Hero() {
     <div className="w-full h-screen">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0}   // কোন gap
+        spaceBetween={0}  
         slidesPerView={1}
         loop={true}
         navigation

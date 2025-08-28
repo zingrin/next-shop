@@ -1,8 +1,8 @@
-import Hero from "@/components/Hero";
-import Reviews from "@/components/Review";
-import TrendingCollection from "@/components/TrendingCollection";
+import Hero from "@/components/hero/page";
 import ProductsPage from "./products/page";
+import TrendingCollection from "@/components/TrendingCollecton/page";
 import About from "./about/page";
+import Reviews from "@/components/Review/page";
 
 export default function Home() {
   return (
