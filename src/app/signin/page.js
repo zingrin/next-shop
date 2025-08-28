@@ -38,8 +38,13 @@ export default function SignInPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <Toaster position="top-right" reverseOrder={false} />
-      <form onSubmit={handleSignIn} className="bg-white p-6 rounded shadow-md w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center text-amber-600">Sign In</h2>
+      <form
+        onSubmit={handleSignIn}
+        className="bg-white p-6 rounded shadow-md w-96"
+      >
+        <h2 className="text-2xl font-bold mb-4 text-center text-amber-600">
+          Sign In
+        </h2>
         {error && <p className="text-red-500 mb-3 text-center">{error}</p>}
 
         <input
@@ -67,7 +72,7 @@ export default function SignInPage() {
 
         {/* ✅ Sign Up link */}
         <p className="mt-4 text-center text-gray-600">
-          Don't have an account?{" "}
+          {"Don't have an account? "}
           <span
             className="text-amber-500 font-semibold cursor-pointer hover:underline"
             onClick={() => router.push("/signup")}
