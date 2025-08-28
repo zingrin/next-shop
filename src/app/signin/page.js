@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/firebase.config";
 import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 export default function SignInPage() {
   const router = useRouter();
