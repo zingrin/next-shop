@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import Image from "next/image";
 export default function TrendingCollection() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,9 +31,11 @@ export default function TrendingCollection() {
                 key={item.id}
                 className="bg-white rounded-xl shadow-md hover:shadow-xl transition transform hover:-translate-y-1 duration-300"
               >
-                <img
-                  src={item.image}
+                <Image
+                  src={item.image.replace("i.ibb.co.com", "i.ibb.co")}
                   alt={item.name}
+                   width={400} 
+                   height={500}
                   className="w-full h-64 object-cover rounded-t-xl"
                 />
                 <div className="p-4">

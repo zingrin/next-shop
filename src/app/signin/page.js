@@ -3,9 +3,8 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase.config";
-import Link from "next/link";
-import { Toaster } from "react-hot-toast";
+import { auth } from "../../firebase.config";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function SignInPage() {
   const router = useRouter();
@@ -20,31 +19,17 @@ export default function SignInPage() {
     setLoading(true);
 
     if (!email || !password) {
-      setError("Email and password are required");
+      setError("Email and password required");
       setLoading(false);
       return;
     }
 
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
-
-      // Success toast
       toast.success(`Welcome ${res.user.displayName || "User"}!`);
-
-      // Redirect to home after a short delay
-      setTimeout(() => {
-        router.push("/");
-      }, 1000);
+      setTimeout(() => router.push("/"), 1000);
     } catch (err) {
-      if (err.code === "auth/user-not-found") {
-        setError("No user found with this email.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("Incorrect password.");
-      } else if (err.code === "auth/invalid-email") {
-        setError("Invalid email address.");
-      } else {
-        setError(err.message);
-      }
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -53,14 +38,8 @@ export default function SignInPage() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <Toaster position="top-right" reverseOrder={false} />
-      <form
-        onSubmit={handleSignIn}
-        className="bg-white p-6 rounded shadow-md w-96"
-      >
-        <h2 className="text-2xl font-bold mb-4 text-center text-amber-600">
-          Sign In
-        </h2>
-
+      <form onSubmit={handleSignIn} className="bg-white p-6 rounded shadow-md w-96">
+        <h2 className="text-2xl font-bold mb-4 text-center text-amber-600">Sign In</h2>
         {error && <p className="text-red-500 mb-3 text-center">{error}</p>}
 
         <input
@@ -70,7 +49,6 @@ export default function SignInPage() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-
         <input
           type="password"
           placeholder="Password"
@@ -82,19 +60,20 @@ export default function SignInPage() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-amber-500 text-white p-2 rounded hover:bg-amber-600 transition"
+          className="w-full bg-amber-500 text-white p-2 rounded hover:bg-amber-600"
         >
           {loading ? "Signing in..." : "Sign In"}
         </button>
 
+        {/* ✅ Sign Up link */}
         <p className="mt-4 text-center text-gray-600">
           Don't have an account?{" "}
-          <Link
-            href="/signup"
-            className="text-amber-600 font-semibold hover:underline"
+          <span
+            className="text-amber-500 font-semibold cursor-pointer hover:underline"
+            onClick={() => router.push("/signup")}
           >
             Sign Up
-          </Link>
+          </span>
         </p>
       </form>
     </div>

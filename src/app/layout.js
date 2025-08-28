@@ -1,9 +1,10 @@
-import { Inter, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/footer/page";
+import { Toaster } from "react-hot-toast";
 import Navbar from "@/components/navbar/page";
+import Footer from "@/components/footer/page";
 
-const geistSans = Inter({
+const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
@@ -21,11 +22,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}> suppressHydrationWarning
+      <body
+        className={`${geistSans.variable} ${geistMono.variable}`}
+        suppressHydrationWarning
+      >
         <Navbar />
         <main>{children}</main>
+        <Toaster position="top-right" reverseOrder={false} />
         <Footer />
       </body>
+
     </html>
   );
 }

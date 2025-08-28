@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 const reviews = [
   {
@@ -46,22 +47,21 @@ export default function Reviews() {
 
         <div className="bg-white p-8 rounded-2xl shadow-md relative">
           <div className="flex flex-col items-center">
-            <img
+            <Image
               src={avatar}
               alt={name}
+              width={150}
+              height={150}
               className="w-24 h-24 rounded-full mb-4 object-cover"
             />
             <h3 className="text-xl font-semibold text-gray-800">{name}</h3>
             <p className="text-sm text-gray-500 mb-2">{role}</p>
 
-            {/* Rating Stars */}
             <div className="flex justify-center mb-4">
               {Array.from({ length: 5 }).map((_, idx) => (
                 <span
                   key={idx}
-                  className={`text-amber-500 text-lg ${
-                    idx < rating ? "opacity-100" : "opacity-30"
-                  }`}
+                  className={`text-amber-500 text-lg ${idx < rating ? "opacity-100" : "opacity-30"}`}
                 >
                   ★
                 </span>
@@ -71,7 +71,6 @@ export default function Reviews() {
             <p className="text-gray-700 italic max-w-xl">{`"${comment}"`}</p>
           </div>
 
-          {/* Navigation Buttons */}
           <div className="flex justify-between mt-6">
             <button
               onClick={prevReview}

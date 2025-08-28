@@ -1,9 +1,11 @@
 "use client";
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Image from "next/image";
 
 const slides = [
   {
@@ -31,7 +33,7 @@ export default function Hero() {
     <div className="w-full h-screen">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={0}  
+        spaceBetween={0}
         slidesPerView={1}
         loop={true}
         navigation
@@ -42,10 +44,11 @@ export default function Hero() {
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
             <div className="relative h-screen">
-                
-              <img
+              <Image
                 src={slide.image}
                 alt={slide.title}
+                width={1920}
+                height={1080}
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white bg-black/40">

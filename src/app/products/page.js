@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
@@ -23,10 +24,8 @@ export default function ProductsPage() {
       .catch(console.error);
   }, []);
 
-  // Quick View
   const handleQuickView = (product) => setQuickViewProduct(product);
 
-  // Add to Cart (with default size/color/quantity)
   const handleAddToCart = (product) => {
     setSelectedProduct({
       ...product,
@@ -36,7 +35,6 @@ export default function ProductsPage() {
     });
   };
 
-  // Confirm Add to Cart
   const confirmAddToCart = () => {
     const product = selectedProduct;
     const exists = cart.find(
@@ -101,11 +99,14 @@ export default function ProductsPage() {
             key={product._id}
             className="bg-white shadow-lg rounded-2xl overflow-hidden hover:shadow-2xl transition relative group"
           >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-64 object-contain p-4"
-            />
+            <div className="relative w-full h-64">
+              <Image
+                src={product.image.replace("i.ibb.co.com", "i.ibb.co")}
+                alt={product.name}
+                fill
+                className="object-contain p-4"
+              />
+            </div>
             <div className="p-5 text-center">
               <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
               <p className="text-amber-600 font-bold mt-2">${product.price}</p>
@@ -141,11 +142,14 @@ export default function ProductsPage() {
               ✖
             </button>
             <div className="flex flex-col md:flex-row gap-6">
-              <img
-                src={quickViewProduct.image}
-                alt={quickViewProduct.name}
-                className="w-full md:w-1/2 h-64 object-contain rounded-xl"
-              />
+              <div className="relative w-full md:w-1/2 h-64">
+                <Image
+                  src={quickViewProduct.image.replace("i.ibb.co.com", "i.ibb.co")}
+                  alt={quickViewProduct.name}
+                  fill
+                  className="object-contain rounded-xl"
+                />
+              </div>
               <div className="flex flex-col justify-center">
                 <h3 className="text-2xl font-bold text-gray-800">{quickViewProduct.name}</h3>
                 <p className="text-amber-600 font-bold mt-2">${quickViewProduct.price}</p>
@@ -167,11 +171,14 @@ export default function ProductsPage() {
               ✖
             </button>
             <div className="flex flex-col md:flex-row gap-6">
-              <img
-                src={selectedProduct.image}
-                alt={selectedProduct.name}
-                className="w-full md:w-1/2 h-64 object-contain rounded-xl"
-              />
+              <div className="relative w-full md:w-1/2 h-64">
+                <Image
+                  src={selectedProduct.image.replace("i.ibb.co.com", "i.ibb.co")}
+                  alt={selectedProduct.name}
+                  fill
+                  className="object-contain rounded-xl"
+                />
+              </div>
               <div className="flex flex-col justify-center">
                 <h3 className="text-2xl font-bold text-gray-800">{selectedProduct.name}</h3>
                 <p className="text-amber-600 font-bold mt-2">${selectedProduct.price}</p>
@@ -252,11 +259,14 @@ export default function ProductsPage() {
                     key={`${item._id}-${item.selectedSize}-${item.selectedColor}`}
                     className="flex gap-4 items-center border-b pb-4"
                   >
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-24 h-24 object-contain rounded-lg"
-                    />
+                    <div className="relative w-24 h-24">
+                      <Image
+                        src={item.image.replace("i.ibb.co.com", "i.ibb.co")}
+                        alt={item.name}
+                        fill
+                        className="object-contain rounded-lg"
+                      />
+                    </div>
                     <div className="flex-1">
                       <h3 className="text-lg font-semibold">{item.name}</h3>
                       <p className="text-gray-600">
